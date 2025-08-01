@@ -1,16 +1,19 @@
-<form onsubmit="bookRoom(event)">
-  <select id="roomType" required>
-    <option value="">Select Room Type</option>
-    <option>Single</option>
-    <option>Double</option>
-  </select>
-  <input type="date" id="date" required />
-  <button type="submit">Book</button>
-</form>
 <script>
-function bookRoom(e) {
-  e.preventDefault();
-  alert("Room booked successfully!");
-  window.location.href = "dashboard.html";
-}
+  document.getElementById("bookingForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const booking = {
+      name: document.getElementById("name").value,
+      room: document.getElementById("room").value,
+      date: document.getElementById("date").value
+    };
+
+    // Get existing bookings or empty array
+    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    bookings.push(booking);
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+
+    alert("Room booked successfully!");
+    window.location.href = "dashboard.html";
+  });
 </script>

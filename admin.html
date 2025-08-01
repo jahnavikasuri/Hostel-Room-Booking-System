@@ -1,2 +1,22 @@
-<h2>Admin Dashboard</h2>
-<p>Display all booking requests here. (Future: fetch from backend)</p>
+<body>
+  <h2>Admin Dashboard</h2>
+  <table border="1" id="bookingTable">
+    <tr>
+      <th>Name</th>
+      <th>Room</th>
+      <th>Date</th>
+    </tr>
+  </table>
+
+  <script>
+    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
+    const table = document.getElementById("bookingTable");
+
+    bookings.forEach(booking => {
+      const row = table.insertRow();
+      row.insertCell(0).innerText = booking.name;
+      row.insertCell(1).innerText = booking.room;
+      row.insertCell(2).innerText = booking.date;
+    });
+  </script>
+</body>
