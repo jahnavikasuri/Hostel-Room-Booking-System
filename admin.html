@@ -1,33 +1,37 @@
+<!-- admin.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Admin Dashboard</title>
+  <meta charset="UTF-8">
+  <title>Admin Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-  <h2>Admin Dashboard</h2>
-  <table border="1">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Room Type</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody id="bookingTable"></tbody>
-  </table>
-
-  <script>
-    window.onload = async () => {
-      const response = await fetch("http://localhost:5000/api/bookings/all");
-      const bookings = await response.json();
-
-      const table = document.getElementById("bookingTable");
-
-      bookings.forEach(b => {
-        const row = table.insertRow();
-        row.innerHTML = `<td>${b.name}</td><td>${b.roomType}</td><td>${new Date(b.date).toLocaleDateString()}</td>`;
-      });
-    };
-  </script>
+  <div class="container mt-4">
+    <h2>Admin Panel</h2>
+    <p>Manage room bookings:</p>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Room</th>
+          <th>Dates</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>John</td>
+          <td>Room 101</td>
+          <td>Aug 5 - Aug 15</td>
+          <td>Pending</td>
+          <td><button class="btn btn-success btn-sm">Approve</button></td>
+        </tr>
+        <!-- More rows -->
+      </tbody>
+    </table>
+    <a href="index.html" class="btn btn-danger float-end">Logout</a>
+  </div>
 </body>
 </html>
