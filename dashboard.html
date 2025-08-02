@@ -1,7 +1,10 @@
-<body>
-  <h2>Welcome, <span id="username"></span></h2>
-  <a href="book-room.html">Book a Room</a>
-</body>
-<script>
-document.getElementById("username").innerText = localStorage.getItem("user");
-</script>
+window.onload = async () => {
+    const res = await fetch('http://localhost:5000/api/bookings/all');
+    const bookings = await res.json();
+
+    const table = document.getElementById('bookingTable');
+    bookings.forEach(b => {
+        const row = table.insertRow();
+        row.innerHTML = `<td>${b.name}</td><td>${b.roomType}</td><td>${new Date(b.date).toLocaleDateString()}</td>`;
+    });
+};

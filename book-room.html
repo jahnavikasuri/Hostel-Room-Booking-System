@@ -1,19 +1,17 @@
-<script>
-  document.getElementById("bookingForm").addEventListener("submit", function (e) {
+document.querySelector('form').addEventListener('submit', async (e) => {
     e.preventDefault();
-
-    const booking = {
-      name: document.getElementById("name").value,
-      room: document.getElementById("room").value,
-      date: document.getElementById("date").value
+    const data = {
+        name: document.getElementById('name').value,
+        roomType: document.getElementById('roomType').value,
+        date: document.getElementById('date').value
     };
 
-    // Get existing bookings or empty array
-    let bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-    bookings.push(booking);
-    localStorage.setItem("bookings", JSON.stringify(bookings));
+    const res = await fetch('http://localhost:5000/api/bookings/book', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+    });
 
-    alert("Room booked successfully!");
-    window.location.href = "dashboard.html";
-  });
-</script>
+    const result = await res.json();
+    alert(result.message);
+});

@@ -1,13 +1,32 @@
-<form onsubmit="registerUser(event)">
-  <input type="text" id="name" required />
-  <input type="email" id="email" required />
-  <input type="password" id="password" required />
-  <button type="submit">Register</button>
-</form>
-<script>
-function registerUser(e) {
-  e.preventDefault();
-  alert("Registration successful! Now login.");
-  window.location.href = "index.html";
-}
-</script>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Register</title>
+</head>
+<body>
+  <h2>Register</h2>
+  <form id="registerForm">
+    <input type="text" id="username" placeholder="Username" required><br><br>
+    <input type="password" id="password" placeholder="Password" required><br><br>
+    <button type="submit">Register</button>
+  </form>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const response = await fetch("http://localhost:5000/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const result = await response.json();
+      alert(result.message);
+      window.location.href = "index.html"; // Redirect to login
+    });
+  </script>
+</body>
+</html>

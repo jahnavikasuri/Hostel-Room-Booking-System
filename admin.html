@@ -1,22 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+</head>
 <body>
   <h2>Admin Dashboard</h2>
-  <table border="1" id="bookingTable">
-    <tr>
-      <th>Name</th>
-      <th>Room</th>
-      <th>Date</th>
-    </tr>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Room Type</th>
+        <th>Date</th>
+      </tr>
+    </thead>
+    <tbody id="bookingTable"></tbody>
   </table>
 
   <script>
-    const bookings = JSON.parse(localStorage.getItem("bookings")) || [];
-    const table = document.getElementById("bookingTable");
+    window.onload = async () => {
+      const response = await fetch("http://localhost:5000/api/bookings/all");
+      const bookings = await response.json();
 
-    bookings.forEach(booking => {
-      const row = table.insertRow();
-      row.insertCell(0).innerText = booking.name;
-      row.insertCell(1).innerText = booking.room;
-      row.insertCell(2).innerText = booking.date;
-    });
+      const table = document.getElementById("bookingTable");
+
+      bookings.forEach(b => {
+        const row = table.insertRow();
+        row.innerHTML = `<td>${b.name}</td><td>${b.roomType}</td><td>${new Date(b.date).toLocaleDateString()}</td>`;
+      });
+    };
   </script>
 </body>
+</html>

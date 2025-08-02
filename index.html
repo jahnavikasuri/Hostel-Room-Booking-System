@@ -1,21 +1,37 @@
-<!-- index.html -->
-<script>
-function loginUser(e) {
-  e.preventDefault();
-  const email = document.getElementById('email').value;
-  const password = document.getElementById('password').value;
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+  <h2>Login</h2>
+  <form id="loginForm">
+    <input type="text" id="username" placeholder="Username" required><br><br>
+    <input type="password" id="password" placeholder="Password" required><br><br>
+    <button type="submit">Login</button>
+  </form>
 
-  if (email === "admin@hostel.com" && password === "admin123") {
-    window.location.href = "admin.html";
-  } else if (email && password) {
-    localStorage.setItem("user", email);
-    window.location.href = "dashboard.html";
-  } else {
-    alert("Invalid Credentials!");
-  }
-}
-</script>
-<form onsubmit="loginUser(event)">
-  <!-- Email/Password Inputs -->
-</form>
-   
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(result.message);
+        window.location.href = "book-room.html"; // Redirect to booking page
+      } else {
+        alert(result.message);
+      }
+    });
+  </script>
+</body>
+</html>
