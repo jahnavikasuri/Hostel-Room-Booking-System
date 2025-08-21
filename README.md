@@ -23,6 +23,7 @@ It provides the user interface for **students** and **admin** to manage hostel r
 - CSS3
 - JavaScript (Vanilla)
 - We can also fetch API for backend communication
-Bash
-git clone https://github.com/jahnavikasuri/Hostel-Room-Booking-System.git
+
+#BASh
+git clone https://github.com/jahnavikasuri/hostel-room-booking.git
 ![Hostel Room Booking Frontend Screenshot](screenshot1.png)(screenshot2.png)(screenshot3.png)(screenshot4.png)(screenshot5.png)
