@@ -24,4 +24,4 @@ It provides the user interface for **students** and **admin** to manage hostel r
 - JavaScript (Vanilla)
 - We can also fetch API for backend communication
 
-![Hostel Room Booking Frontend Screenshot](Screenshot1.png)(Screenshot2.png)(Screenshot3.png)(Screenshot4.png)(Screenshot5.png)
+![Hostel Room Booking Frontend Screenshot](screenshot1.png)(screenshot2.png)(screenshot3.png)(screenshot4.png)(screenshot5.png)
